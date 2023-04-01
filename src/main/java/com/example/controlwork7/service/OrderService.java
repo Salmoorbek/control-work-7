@@ -30,7 +30,7 @@ public class OrderService {
                         .clientId(userId)
                         .dishId(dishId)
                         .restaurantId(restaurantId)
-                        .date(LocalDate.now())
+                        .orderDate(LocalDate.now())
                         .build();
         orderDao.createNewOrder(order);
         return OrderDto.from(order);

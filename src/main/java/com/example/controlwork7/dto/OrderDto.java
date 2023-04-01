@@ -19,7 +19,7 @@ public class OrderDto {
                 .clientId(order.getClientId())
                 .restaurantId(order.getRestaurantId())
                 .dishId(order.getDishId())
-                .orderDate(order.getDate())
+                .orderDate(order.getOrderDate())
                 .build();
     }
 }

@@ -62,9 +62,9 @@ public class InitData {
     }
     public List<Order> creatOrder(){
         List<Order> orders = new ArrayList<>();
-        orders.add(new Order(1,1,1,1, LocalDate.of(2023,12,21)));
-        orders.add(new Order(2,1,2,1, LocalDate.of(2022,12,21)));
-        orders.add(new Order(3,2,3,2, LocalDate.of(2022,12,21)));
+        orders.add(new Order(1,1,1,1, LocalDate.of(2023,12,10)));
+        orders.add(new Order(2,1,2,1, LocalDate.of(2022,12,11)));
+        orders.add(new Order(3,2,3,2, LocalDate.of(2022,12,5)));
         return orders;
     }
     public List<Restaurant> creatRestaurant(){

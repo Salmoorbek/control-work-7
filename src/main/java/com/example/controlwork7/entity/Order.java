@@ -14,13 +14,13 @@ public class Order {
     private int clientId;
     private int restaurantId;
     private int dishId;
-    private LocalDate date;
+    private LocalDate orderDate;
 
-    public Order(int id, int clientId, int restaurantId, int dishId, LocalDate date) {
+    public Order(int id, int clientId, int restaurantId, int dishId, LocalDate orderDate) {
         this.id = id;
         this.clientId = clientId;
         this.restaurantId = restaurantId;
         this.dishId = dishId;
-        this.date = date;
+        this.orderDate = orderDate;
     }
 }

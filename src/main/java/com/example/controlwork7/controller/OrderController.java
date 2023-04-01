@@ -25,7 +25,7 @@ public class OrderController {
 
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
-    @GetMapping()
+    @GetMapping
     public List<OrderDto> getOrders(Authentication authentication) {
         return orderService.getClientOrders(authentication);
     }

@@ -1,10 +1,8 @@
 package com.example.controlwork7.controller;
 
 import com.example.controlwork7.dto.DishDto;
-import com.example.controlwork7.dto.OrderDto;
 import com.example.controlwork7.service.DishService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 @Component
@@ -39,7 +40,7 @@ public class OrderDao extends BaseDao{
                 ps.setInt(1, order.get(i).getClientId());
                 ps.setInt(2, order.get(i).getRestaurantId());
                 ps.setInt(3, order.get(i).getDishId());
-                ps.setDate(4, Date.valueOf(order.get(i).getDate()));
+                ps.setDate(4, Date.valueOf(order.get(i).getOrderDate()));
             }
 
             @Override
@@ -65,15 +66,10 @@ public class OrderDao extends BaseDao{
             ps.setInt(1, order.getClientId());
             ps.setInt(2, order.getRestaurantId());
             ps.setInt(3, order.getDishId());
-            ps.setDate(4, Date.valueOf(order.getDate()));
+            ps.setDate(4, Date.valueOf(LocalDate.now()));
             return  ps;
         });
     }
-//    public List<Dish> checkDishInRestaurant(int restaurantId) {
-//        String sql = "SELECT * FROM  orders " +
-//                " WHERE restaurant_id = ? ";
-//        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Dish.class), restaurantId);
-//    }
     public List<Dish> checkOrderByDishIdAndRestaurantId(int dishId, int restaurantId) {
         String sql = "SELECT * FROM dish WHERE id = ? and restaurant_id = ?";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Dish.class), dishId, restaurantId);
@@ -83,7 +79,8 @@ public class OrderDao extends BaseDao{
         return jdbcTemplate.queryForObject(sql, Integer.class, email);
     }
     public List<Order> getClientOrders(String email){
-        String sql = "SELECT * FROM users WHERE email = ?";
+        String sql = "SELECT * FROM orders " +
+                "inner join users on users.id = orders.client_id WHERE users.email = ?";
         return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(Order.class), email);
     }
 }
