@@ -21,12 +21,8 @@ public class OrderService {
     }
 
     public OrderDto createOrder(int dishId, int restaurantId, Authentication authentication) throws ResourceNotFoundException {
-        if (orderDao.getDishInOrder(dishId) == null) {
+        if (orderDao.checkOrderByDishIdAndRestaurantId(dishId, restaurantId).isEmpty()) {
             throw new ResourceNotFoundException("Блюдо: " + dishId + " не найдено");
-        }
-
-        if (orderDao.checkDishInRestaurant(restaurantId) == null) {
-            throw new ResourceNotFoundException("Блюдо: " + restaurantId + "в ресторане не найдено");
         }
         User user = (User) authentication.getPrincipal();
         int userId = orderDao.getUserIdByUserName(user.getUsername());

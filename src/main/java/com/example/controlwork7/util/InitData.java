@@ -55,6 +55,9 @@ public class InitData {
         dishes.add(new Dish(1,"плов","обед", 100, 1));
         dishes.add(new Dish(2,"логман","ужин", 120, 1));
         dishes.add(new Dish(3,"суп","завтрак", 50, 2));
+        dishes.add(new Dish(4,"рис","завтрак", 25, 3));
+        dishes.add(new Dish(5,"котлета","обед", 70, 2));
+
         return dishes;
     }
     public List<Order> creatOrder(){

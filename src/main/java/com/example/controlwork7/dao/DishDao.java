@@ -51,8 +51,12 @@ public class DishDao extends BaseDao{
         String sql = "alter sequence dish_id_seq restart with 1 ";
         jdbcTemplate.update(sql);
     }
-    public List<Dish> getByRestaurantId(int restaurantId) {
+    public List<Dish> getDishesByRestaurantId(int restaurantId) {
         String sql = "SELECT * FROM dish WHERE restaurant_id=?";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Dish.class), restaurantId);
+    }
+    public List<Dish> getAllDishes() {
+        String sql = "SELECT * FROM dish ";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Dish.class));
     }
 }

@@ -21,7 +21,4 @@ public class RestaurantService {
         }
         return dtos;
     }
-    public RestaurantDto getRestaurantById(int id) {
-        return RestaurantDto.from(restaurantDao.getById(id));
-    }
 }

@@ -1,6 +1,5 @@
 package com.example.controlwork7.dao;
 
-import com.example.controlwork7.entity.Client;
 import com.example.controlwork7.entity.Dish;
 import com.example.controlwork7.entity.Order;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
@@ -57,25 +56,27 @@ public class OrderDao extends BaseDao{
         String sql = "alter sequence orders_id_seq restart with 1 ";
         jdbcTemplate.update(sql);
     }
-    public List<Order> getDishInOrder(int orderId) {
-        String sql = "SELECT * FROM orders WHERE dish_id = ?";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Order.class), orderId);
-    }
     public void createNewOrder(Order order) {
-        String sql = "INSERT INTO orders (client_id, dish_id, order_date) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO orders (client_id, restaurant_id, dish_id, order_date) " +
+                "VALUES (?, ?, ?, ?)";
 
         jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, order.getClientId());
-            ps.setInt(2, order.getDishId());
-            ps.setDate(3, Date.valueOf(order.getDate()));
+            ps.setInt(2, order.getRestaurantId());
+            ps.setInt(3, order.getDishId());
+            ps.setDate(4, Date.valueOf(order.getDate()));
             return  ps;
         });
     }
-    public List<Dish> checkDishInRestaurant(int restaurantId) {
-        String sql = "SELECT * FROM  orders " +
-                " WHERE restaurant_id = ? ";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Dish.class), restaurantId);
+//    public List<Dish> checkDishInRestaurant(int restaurantId) {
+//        String sql = "SELECT * FROM  orders " +
+//                " WHERE restaurant_id = ? ";
+//        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Dish.class), restaurantId);
+//    }
+    public List<Dish> checkOrderByDishIdAndRestaurantId(int dishId, int restaurantId) {
+        String sql = "SELECT * FROM dish WHERE id = ? and restaurant_id = ?";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Dish.class), dishId, restaurantId);
     }
     public int getUserIdByUserName(String email){
         String sql = "SELECT id FROM users WHERE email = ?";
