@@ -1,8 +1,8 @@
 package com.example.controlwork7.dao;
 
 import com.example.controlwork7.entity.Client;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -30,7 +30,7 @@ public class ClientDao extends BaseDao{
                 "  role text" +
                 ");");
     }
-    public void saveUser(List<Client> users) {
+    public void save(List<Client> users) {
         String sql = "INSERT INTO users (email, name, enabled, password, role) " +
                 "VALUES (?, ?, ?, ?, ?);";
         jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
@@ -48,6 +48,19 @@ public class ClientDao extends BaseDao{
             }
         });
     }
+    public void createNewUser(Client user) {
+        String sql = "INSERT INTO users (email, name, enabled, password, role) " +
+                "VALUES (?, ?, ?, ?, ?);";
+        jdbcTemplate.update(con -> {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, user.getEmail());
+            ps.setString(2, user.getName());
+            ps.setBoolean(3, Boolean.TRUE);
+            ps.setString(4, this.encoder.encode(user.getPassword()));
+            ps.setString(5, "USER");
+            return ps;
+        });
+    }
     public void deleteAll() {
         String sql = "delete from users";
         jdbcTemplate.update(sql);
@@ -55,5 +68,9 @@ public class ClientDao extends BaseDao{
     public void alertSequenceUser() {
         String sql = "alter sequence users_id_seq restart with 1 ";
         jdbcTemplate.update(sql);
+    }
+    public List<Client> getAllUsers() {
+        String sql = "SELECT * FROM users ";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Client.class));
     }
 }

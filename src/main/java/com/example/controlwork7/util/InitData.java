@@ -26,17 +26,17 @@ public class InitData {
             dishDao.createTable();
             orderDao.createTable();
 
+            orderDao.deleteAll();
+            dishDao.deleteAll();
             clientDao.deleteAll();
             restaurantDao.deleteAll();
-            dishDao.deleteAll();
-            orderDao.deleteAll();
 
             clientDao.alertSequenceUser();
             restaurantDao.alertSequenceRestaurant();
             dishDao.alertSequenceDish();
             orderDao.alertSequenceOrder();
 
-            clientDao.saveUser(creatUsers());
+            clientDao.save(creatUsers());
             restaurantDao.saveRestaurants(creatRestaurant());
             dishDao.saveDish(creatDish());
             orderDao.saveOrder(creatOrder());
@@ -54,14 +54,14 @@ public class InitData {
         List<Dish> dishes = new ArrayList<>();
         dishes.add(new Dish(1,"плов","обед", 100, 1));
         dishes.add(new Dish(2,"логман","ужин", 120, 1));
-        dishes.add(new Dish(3,"суп","завтрак", 50, 1));
+        dishes.add(new Dish(3,"суп","завтрак", 50, 2));
         return dishes;
     }
     public List<Order> creatOrder(){
         List<Order> orders = new ArrayList<>();
-        orders.add(new Order(1,1,1, LocalDate.of(2023,12,21)));
-        orders.add(new Order(2,1,1, LocalDate.of(2022,12,21)));
-        orders.add(new Order(3,1,1, LocalDate.of(2022,12,21)));
+        orders.add(new Order(1,1,1,1, LocalDate.of(2023,12,21)));
+        orders.add(new Order(2,1,2,1, LocalDate.of(2022,12,21)));
+        orders.add(new Order(3,2,3,2, LocalDate.of(2022,12,21)));
         return orders;
     }
     public List<Restaurant> creatRestaurant(){
