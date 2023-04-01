@@ -14,4 +14,11 @@ public class Order {
     private int clientId;
     private int dishId;
     private LocalDate date;
+
+    public Order(int id, int clientId, int dishId, LocalDate date) {
+        this.id = id;
+        this.clientId = clientId;
+        this.dishId = dishId;
+        this.date = date;
+    }
 }
