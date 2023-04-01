@@ -2,7 +2,6 @@ package com.example.controlwork7.service;
 
 import com.example.controlwork7.dao.DishDao;
 import com.example.controlwork7.dto.DishDto;
-import com.example.controlwork7.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

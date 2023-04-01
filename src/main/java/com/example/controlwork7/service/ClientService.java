@@ -4,7 +4,6 @@ package com.example.controlwork7.service;
 import com.example.controlwork7.dao.ClientDao;
 import com.example.controlwork7.dto.ClientDto;
 import com.example.controlwork7.entity.Client;
-import com.example.controlwork7.exception.ResourceNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

@@ -3,7 +3,6 @@ package com.example.controlwork7.service;
 import com.example.controlwork7.dao.OrderDao;
 import com.example.controlwork7.dto.OrderDto;
 import com.example.controlwork7.entity.Order;
-import com.example.controlwork7.exception.ResourceNotFoundException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,7 @@ public class OrderService {
         this.orderDao = orderDao;
     }
 
-    public OrderDto createOrder(int dishId, int restaurantId, Authentication authentication) throws ResourceNotFoundException {
+    public OrderDto createOrder(int dishId, int restaurantId, Authentication authentication)  {
         User user = (User) authentication.getPrincipal();
         int userId = orderDao.getUserIdByUserName(user.getUsername());
         var order = Order.builder()
