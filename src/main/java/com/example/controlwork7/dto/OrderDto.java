@@ -10,14 +10,14 @@ import java.time.LocalDate;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE,force = true)
 public class OrderDto {
-    private int id;
     private int clientId;
     private int dishId;
+    private int restaurantId;
     private LocalDate orderDate;
     public static OrderDto from(Order order) {
         return builder()
-                .id(order.getId())
                 .clientId(order.getClientId())
+                .restaurantId(order.getRestaurantId())
                 .dishId(order.getDishId())
                 .orderDate(order.getDate())
                 .build();
