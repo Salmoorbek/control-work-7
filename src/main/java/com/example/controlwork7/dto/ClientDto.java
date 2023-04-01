@@ -6,7 +6,7 @@ import lombok.*;
 @Data
 @Builder(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@NoArgsConstructor(access = AccessLevel.PRIVATE,force = true)
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 public class ClientDto {
     private String name;
     private String email;

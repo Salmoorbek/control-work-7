@@ -21,11 +21,6 @@ public class ClientService {
     }
 
     public ClientDto registerUser(String name, String email, String password) {
-        for (int i = 0; i < clientDao.getAllUsers().size(); i++) {
-            if (Objects.equals(clientDao.getAllUsers().get(i).getEmail(), email)) {
-                throw new ResourceNotFoundException("Пользователь с таким адресом почты уже зарегистрирован");
-            }
-        }
         var usr = Client.builder()
                 .email(email)
                 .name(name)
@@ -36,5 +31,8 @@ public class ClientService {
         clientDao.createNewUser(usr);
 
         return ClientDto.from(usr);
+    }
+    public boolean checkUserEmail(String email){
+        return Objects.equals(clientDao.getUsersByEmail(email).getEmail(), email);
     }
 }

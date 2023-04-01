@@ -17,13 +17,13 @@ public class DishService {
     }
 
     public List<DishDto> getDishesByRestaurantId(int restaurantId) {
-        if(dishDao.getDishesByRestaurantId(restaurantId).isEmpty()){
-            throw new ResourceNotFoundException("Такого ресторана нет ");
-        }
         List<DishDto> dishDtoList = new ArrayList<>();
         for (int i = 0; i < dishDao.getDishesByRestaurantId(restaurantId).size(); i++) {
             dishDtoList.add(DishDto.from(dishDao.getDishesByRestaurantId(restaurantId).get(i)));
         }
         return dishDtoList;
+    }
+    public boolean checkRestaurant(int restaurantId) {
+        return !dishDao.getDishesByRestaurantId(restaurantId).isEmpty();
     }
 }

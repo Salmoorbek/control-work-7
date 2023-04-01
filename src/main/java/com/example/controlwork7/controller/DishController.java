@@ -15,9 +15,9 @@ import java.util.List;
 public class DishController {
     private final DishService dishService;
 
-    @GetMapping("/restaurantDishes")
-    public ResponseEntity<List<DishDto>> getRestaurant(@RequestParam int restaurantId) {
-        if(dishService.getDishesByRestaurantId(restaurantId) != null)
+    @GetMapping("/{restaurantId}")
+    public ResponseEntity<List<DishDto>> getRestaurant(@PathVariable int restaurantId) {
+        if(dishService.checkRestaurant(restaurantId))
             return new ResponseEntity<>(dishService.getDishesByRestaurantId(restaurantId), HttpStatus.OK);
         else
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);

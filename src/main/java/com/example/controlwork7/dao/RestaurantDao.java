@@ -53,8 +53,4 @@ public class RestaurantDao extends BaseDao{
         String sql = "SELECT * FROM restaurant";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Restaurant.class));
     }
-    public Restaurant getById(int id) {
-        String sql = "SELECT * FROM restaurant WHERE id=?";
-        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Restaurant.class), id);
-    }
 }

@@ -55,8 +55,4 @@ public class DishDao extends BaseDao{
         String sql = "SELECT * FROM dish WHERE restaurant_id=?";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Dish.class), restaurantId);
     }
-    public List<Dish> getAllDishes() {
-        String sql = "SELECT * FROM dish ";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Dish.class));
-    }
 }

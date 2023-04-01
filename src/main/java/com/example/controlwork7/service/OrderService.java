@@ -21,9 +21,6 @@ public class OrderService {
     }
 
     public OrderDto createOrder(int dishId, int restaurantId, Authentication authentication) throws ResourceNotFoundException {
-        if (orderDao.checkOrderByDishIdAndRestaurantId(dishId, restaurantId).isEmpty()) {
-            throw new ResourceNotFoundException("Блюдо: " + dishId + " не найдено или его нет в ресторане: " + restaurantId);
-        }
         User user = (User) authentication.getPrincipal();
         int userId = orderDao.getUserIdByUserName(user.getUsername());
         var order = Order.builder()
@@ -34,6 +31,9 @@ public class OrderService {
                         .build();
         orderDao.createNewOrder(order);
         return OrderDto.from(order);
+    }
+    public boolean checkDishesIdAndRestaurantId(int dishId, int restaurantId){
+        return !orderDao.checkOrderByDishIdAndRestaurantId(dishId, restaurantId).isEmpty();
     }
 
     public List<OrderDto> getClientOrders(Authentication authentication) {

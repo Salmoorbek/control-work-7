@@ -69,8 +69,8 @@ public class ClientDao extends BaseDao{
         String sql = "alter sequence users_id_seq restart with 1 ";
         jdbcTemplate.update(sql);
     }
-    public List<Client> getAllUsers() {
-        String sql = "SELECT * FROM users ";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Client.class));
+    public Client getUsersByEmail(String email) {
+        String sql = "SELECT * FROM users where email = ?";
+        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Client.class), email);
     }
 }

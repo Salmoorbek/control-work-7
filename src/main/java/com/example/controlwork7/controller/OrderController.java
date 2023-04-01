@@ -20,7 +20,7 @@ public class OrderController {
     public ResponseEntity<OrderDto> createOrder(@RequestParam int dishId,
                                                @RequestParam int restaurantId,
                                                Authentication authentication) {
-        if (orderService.createOrder(dishId, restaurantId, authentication) != null)
+        if (orderService.checkDishesIdAndRestaurantId(dishId, restaurantId))
             return new ResponseEntity<>(orderService.createOrder(dishId, restaurantId, authentication), HttpStatus.CREATED);
 
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);

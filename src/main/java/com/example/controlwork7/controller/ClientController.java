@@ -14,9 +14,9 @@ public class ClientController {
     private final ClientService clientService;
     @PostMapping
     public ResponseEntity<ClientDto> register(@RequestParam String name, @RequestParam String email, @RequestParam String password) {
-        if(clientService.registerUser(name, email, password)!=null) {
+        if(!clientService.checkUserEmail(email)) {
             return new ResponseEntity<>(clientService.registerUser(name, email, password), HttpStatus.CREATED);
-        }else return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }else return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
 }
