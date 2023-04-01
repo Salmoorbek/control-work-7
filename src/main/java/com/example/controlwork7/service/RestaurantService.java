@@ -15,10 +15,10 @@ public class RestaurantService {
         this.restaurantDao = restaurantDao;
     }
     public List<RestaurantDto> getAllRestaurants() {
-        List<RestaurantDto> dtos = new ArrayList<>();
+        List<RestaurantDto> restaurantDtos = new ArrayList<>();
         for (int i = 0; i < restaurantDao.getAll().size(); i++) {
-            dtos.add(RestaurantDto.from(restaurantDao.getAll().get(i)));
+            restaurantDtos.add(RestaurantDto.from(restaurantDao.getAll().get(i)));
         }
-        return dtos;
+        return restaurantDtos;
     }
 }

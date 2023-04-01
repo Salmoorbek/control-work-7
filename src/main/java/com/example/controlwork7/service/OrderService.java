@@ -22,7 +22,7 @@ public class OrderService {
 
     public OrderDto createOrder(int dishId, int restaurantId, Authentication authentication) throws ResourceNotFoundException {
         if (orderDao.checkOrderByDishIdAndRestaurantId(dishId, restaurantId).isEmpty()) {
-            throw new ResourceNotFoundException("Блюдо: " + dishId + " не найдено");
+            throw new ResourceNotFoundException("Блюдо: " + dishId + " не найдено или его нет в ресторане: " + restaurantId);
         }
         User user = (User) authentication.getPrincipal();
         int userId = orderDao.getUserIdByUserName(user.getUsername());

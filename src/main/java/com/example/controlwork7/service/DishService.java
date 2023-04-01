@@ -17,11 +17,6 @@ public class DishService {
     }
 
     public List<DishDto> getDishesByRestaurantId(int restaurantId) {
-//        for (int i = 0; i < dishDao.getAllDishes().size(); i++) {
-//            if(dishDao.getDishesByRestaurantId(restaurantId).get(i) == dishDao.getAllDishes().get(i)){
-//                throw new ResourceNotFoundException("Такого ресторана нет ");
-//            }
-//        }
         if(dishDao.getDishesByRestaurantId(restaurantId).isEmpty()){
             throw new ResourceNotFoundException("Такого ресторана нет ");
         }
