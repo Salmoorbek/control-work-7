@@ -2,6 +2,7 @@ package com.example.controlwork7.dao;
 
 import com.example.controlwork7.entity.Restaurant;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -46,5 +47,14 @@ public class RestaurantDao extends BaseDao{
     public void alertSequenceRestaurant() {
         String sql = "alter sequence restaurant_id_seq restart with 1 ";
         jdbcTemplate.update(sql);
+    }
+
+    public List<Restaurant> getAll() {
+        String sql = "SELECT * FROM restaurant";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Restaurant.class));
+    }
+    public Restaurant getById(int id) {
+        String sql = "SELECT * FROM restaurant WHERE id=?";
+        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Restaurant.class), id);
     }
 }
